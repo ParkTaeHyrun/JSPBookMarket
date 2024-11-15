@@ -6,7 +6,7 @@
 <%
 	Connection conn = null;
 
-	String url = "jdbc:mysql://localhost:3306/jspbookdb";
+	String url = "jdbc:mysql://localhost:3306/bookmarketdb";
 	String user = "root";
 	String passwd = "12345";
 	

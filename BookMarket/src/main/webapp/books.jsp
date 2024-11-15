@@ -1,9 +1,12 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <%@ page import="dto.Book" %>
 <%@ page import="dao.BookRepository" %>
+<%@ include file="dbconnection.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,34 +31,48 @@
 		 <!-- 본문 영역 -->
 		 <%-- <jsp:useBean id="bookDAO" class="dao.BookRepository" scope="session"></jsp:useBean> --%>
 		 <% 
-		 	BookRepository dao = BookRepository.getInstance();
-		 	ArrayList<Book> listOfBooks = dao.getAllBooks();
+		 	/* BookRepository dao = BookRepository.getInstance();
+		 	ArrayList<Book> listOfBooks = dao.getAllBooks(); */
 		 %>
 		 <div class="row align-items-md-stretch text-center">
 			<% 
-				for(int i = 0; i < listOfBooks.size(); i++){
-		 			Book b = listOfBooks.get(i);
+				/* for(int i = 0; i < listOfBooks.size(); i++){
+		 			Book b = listOfBooks.get(i); */
+		 		
+		 		PreparedStatement ps = null;
+				ResultSet rs = null;
+				 	
+				String sql = "select * from book";
+				ps = conn.prepareStatement(sql);
+				rs = ps.executeQuery();
+				while(rs.next()){
+		 			
 		 	%>
 			<div class="col-md-4">
 				<div class="h-100 p-5">
-					<img alt="이미지" src="<%= request.getContextPath() %>/resources/images/<%= b.getFilename() %>" style="width: 250px; height: 350px;">
-					<h3><%= b.getName() %> </h3>
-					<p> <%= b.getAuthor() %> 
-					<p> <%= b.getPublisher() %> 
+					<img alt="이미지" src="<%= request.getContextPath() %>/resources/images/<%= rs.getString("b_fileName") %>" style="width: 250px; height: 350px;">
+					<h3><%= rs.getString("b_name") %> </h3>
+					<p> <%= rs.getString("b_author") %> 
+					<p> <%= rs.getString("b_publisher") %> 
 					<p> <% 
-							if(b.getDescription().length()<60){
-								out.println(b.getDescription());
+							if(rs.getString("b_description").length()<60){
+								out.println(rs.getString("b_description"));
 							}else{
-								out.println(b.getDescription().substring(0, 60) + " ..."); 
+								out.println(rs.getString("b_description").substring(0, 60) + " ..."); 
 							}
 						%>
-					<p> <%= NumberFormat.getInstance().format(b.getUnitPrice()) %>원 
-					<p> <a href="book_detail.jsp?id=<%= b.getBookId() %>" class="btn btn-secondary">
+					<p> <%= NumberFormat.getInstance().format(rs.getInt("b_unitPrice")) %>원 
+					<p> <a href="book_detail.jsp?id=<%= rs.getString("b_id") %>" class="btn btn-secondary">
 							상세정보 &raquo;
 						</a>
 				</div>
 			</div>
-			<% } %>
+			<% 
+				} 
+				if(rs != null) rs.close();
+				if(ps != null) ps.close();
+				if(conn != null) conn.close();
+			%>
 		 </div>
 		 
 		 <!-- 바닥글 영역 -->

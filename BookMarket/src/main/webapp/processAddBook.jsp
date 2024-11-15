@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
@@ -5,6 +6,7 @@
 <%@ page import="dao.BookRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="dbconnection.jsp" %>
 
 <%
 	//String savePath = "./resources/images";
@@ -45,6 +47,28 @@
 		stock = Long.valueOf(unitInStock);
 	}
 	
+	PreparedStatement ps = null;
+	String sql = "insert into book values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	ps = conn.prepareStatement(sql);
+	
+	ps.setString(1, bookid);
+	ps.setString(2, name);
+	ps.setInt(3, price);
+	ps.setString(4, author);
+	ps.setString(5, description);
+	ps.setString(6, publisher);
+	ps.setString(7, category);
+	ps.setLong(8, stock);
+	ps.setString(9, releaseDate);
+	ps.setString(10, condition);
+	ps.setString(11, fileName);
+	
+	ps.executeUpdate();
+	
+	if(ps != null) ps.close();
+	if(conn != null) conn.close();
+	
+	/* 
 	Book newBook = new Book(bookid, name, price);
 	newBook.setAuthor(author);
 	newBook.setPublisher(publisher);
@@ -57,6 +81,8 @@
 	
 	BookRepository dao = BookRepository.getInstance();
 	dao.addBook(newBook);
-	
+	 */
+	 
+	 
 	response.sendRedirect("books.jsp");
 %>
