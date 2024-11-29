@@ -91,6 +91,6 @@
 		 <!-- 디렉티브 태그 -->
 		 <%@ include file="footer.jsp" %>
 	</div>
-	<script src="./resources/js/check.js"></script>
+	<script src="./resources/js/delcheck.js"></script>
 </body>
 </html>

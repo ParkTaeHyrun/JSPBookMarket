@@ -33,5 +33,31 @@ function checkRegister(){
 		return;
 	}
 	
+	let regExpPasswd = /^[0-9]*$/;
+	let pwd = form.passwd.value;
+	if(!regExpPasswd.test(pwd)){
+		alert("비밀번호는 숫자로만 입력해야 됩니다.");
+		form.passwd.select();
+		return;
+	}
+	
+	let regExpName = /^[가-힣]*$/
+	let name = form.name.value;
+	if(!regExpName.test(name)){
+		alert("이름은 한글로만 입력해야 됩니다.");
+		form.name.select();
+		return;
+	}
+	
+	let regExpPhone = /\d{2,3}-\d{3,4}-\d{4}$/;
+	let phone = form.phone1.value + "-" + form.phone2.value + "-" + form.phone3.value;
+	if(!regExpPhone.test(phone)){
+		alert("전화번호를 확인 하세요.");
+		form.phone2.select();
+		return;
+	}
+	
+	let regExpEMail = /[]/;
+	let email = form.email.value;
 	form.submit();
 }

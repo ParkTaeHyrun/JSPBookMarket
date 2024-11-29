@@ -26,11 +26,11 @@
 		 
 		 <!-- 본문 영역 -->
 		 <div class="row align-items-md-stretch">
-			<form action="processAddBook.jsp" method="post" enctype="multipart/form-data">
+			<form name="newBook" action="processAddBook.jsp" method="post" enctype="multipart/form-data">
 				<div class="mb-3 row">
-					<label class="col-sm-2" for="bookid">도서코드</label>
+					<label class="col-sm-2" for="bookId">도서코드</label>
 					<div class="col-sm-3">
-						<input type="text" name="bookid" class="form-control" id="bookid">
+						<input type="text" name="bookId" class="form-control" id="bookId">
 					</div>
 				</div>
 				<div class="mb-3 row">
@@ -105,7 +105,7 @@
 				
 				<div class="mb-3 row">
 					<div class="col-sm-offset-2 col-sm-10">
-						<input type="submit" class="btn btn-primary" value="등록">
+						<input type="button" onclick="CheckAddBook()" class="btn btn-primary" value="등록">
 					</div>
 				</div>
 			</form>
@@ -115,5 +115,6 @@
 		 <!-- 디렉티브 태그 -->
 		 <%@ include file="footer.jsp" %>
 	</div>
+	<script type="text/javascript" src="/resources/js/validation.js"></script>
 </body>
 </html>

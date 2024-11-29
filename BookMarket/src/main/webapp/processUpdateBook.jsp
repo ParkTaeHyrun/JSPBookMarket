@@ -19,7 +19,7 @@
 	MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, encoding, df);
 	
 	request.setCharacterEncoding("utf-8");
-	String bookid = multi.getParameter("bookid");
+	String bookId = multi.getParameter("bookId");
 	String name = multi.getParameter("name");
 	String unitPrice = multi.getParameter("unitPrice");
 	String author = multi.getParameter("author");
@@ -54,7 +54,7 @@
 	ResultSet rs = null;
 	String sql = "select * from book where b_id = ?";
 	ps = conn.prepareStatement(sql);
-	ps.setString(1, bookid);
+	ps.setString(1, bookId);
 	rs = ps.executeQuery();
 	
 	if(rs.next()){
@@ -72,7 +72,7 @@
 			ps.setString(8, releaseDate);
 			ps.setString(9, condition);
 			ps.setString(10, fileName);
-			ps.setString(11, bookid);
+			ps.setString(11, bookId);
 			ps.executeUpdate();
 		} else {
 			sql = "update book set b_name = ?, b_unitPrice = ?, b_author = ?, b_description = ?, b_publisher = ?, b_category = ?, b_unitsInStock = ?, b_releaseDate = ?, b_condition = ? where b_id = ?";
@@ -87,7 +87,7 @@
 			ps.setLong(7, stock);
 			ps.setString(8, releaseDate);
 			ps.setString(9, condition);
-			ps.setString(10, bookid);
+			ps.setString(10, bookId);
 			ps.executeUpdate();
 		}
 	}

@@ -44,11 +44,11 @@
 				<img src="<%= request.getContextPath() %>/resources/images/<%= rs.getString("b_fileName") %>" style="width: 70%">
 			</div>
 			<div class="col-md-7">
-				<form action="processUpdateBook.jsp" method="post" enctype="multipart/form-data">
+				<form name="newBook" action="processUpdateBook.jsp" method="post" enctype="multipart/form-data">
 					<div class="mb-3 row">
-						<label class="col-sm-2" for="bookid">도서코드</label>
+						<label class="col-sm-2" for="bookId">도서코드</label>
 						<div class="col-sm-3">
-							<input type="text" name="bookid" class="form-control" id="bookid" value="<%= rs.getString("b_id") %>">
+							<input type="text" name="bookId" class="form-control" id="bookId" value="<%= rs.getString("b_id") %>">
 						</div>
 					</div>
 					<div class="mb-3 row">
@@ -123,7 +123,7 @@
 					
 					<div class="mb-3 row">
 						<div class="col-sm-offset-2 col-sm-10">
-							<input type="submit" class="btn btn-primary" value="등록">
+							<input type="button" class="btn btn-primary" value="등록" onclick="CheckAddBook()">
 						</div>
 					</div>
 				</form>
@@ -139,5 +139,6 @@
 		<!-- 디렉티브 태그 -->
 		<%@ include file="footer.jsp" %>
 	</div>
+	<script type="text/javascript" src="/resources/js/validation.js"></script>
 </body>
 </html>

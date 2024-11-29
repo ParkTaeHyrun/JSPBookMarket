@@ -18,7 +18,7 @@
 	MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, encoding, df);
 	
 	request.setCharacterEncoding("utf-8");
-	String bookid = multi.getParameter("bookid");
+	String bookId = multi.getParameter("bookId");
 	String name = multi.getParameter("name");
 	String unitPrice = multi.getParameter("unitPrice");
 	String author = multi.getParameter("author");
@@ -51,7 +51,7 @@
 	String sql = "insert into book values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	ps = conn.prepareStatement(sql);
 	
-	ps.setString(1, bookid);
+	ps.setString(1, bookId);
 	ps.setString(2, name);
 	ps.setInt(3, price);
 	ps.setString(4, author);
