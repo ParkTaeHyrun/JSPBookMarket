@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="5.0">
   <display-name>jspbook</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-  </welcome-file-list>
+  <!-- 시큐리티 역할 설정 -->
+  <security-role>
+  	<role-name>manager</role-name>
+  </security-role>
+  
+  <!-- 웹 자원에 대한 접근설정 -->
+  <security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>jspbook</web-resource-name>
+  		<url-pattern>/ch10/security.jsp</url-pattern>
+  		<http-method>GET</http-method>
+  	</web-resource-collection>
+  	
+  	<!-- 사용자 설정 -->
+  	<auth-constraint>
+  		<description>관리자</description>
+  		<role-name>manager</role-name>
+  	</auth-constraint>
+  </security-constraint>
+  
+  <login-config>
+  	<auth-method>FORM</auth-method>
+  	<form-login-config>
+  		<form-login-page>/ch10/login.jsp</form-login-page>
+  		<form-error-page>/ch10/error.jsp</form-error-page>
+  	</form-login-config>
+  </login-config>
 </web-app>

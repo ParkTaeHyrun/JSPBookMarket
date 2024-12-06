@@ -4,4 +4,33 @@
   <welcome-file-list>
     <welcome-file>welcome.jsp</welcome-file>
   </welcome-file-list>
+  
+    <!-- 시큐리티 역할 설정 -->
+  <security-role>
+  	<role-name>manager</role-name>
+  </security-role>
+  
+  <!-- 웹 자원에 대한 접근설정 -->
+  <security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>BookMarket</web-resource-name>
+  		<url-pattern>/addbook.jsp</url-pattern>
+  		<http-method>GET</http-method>
+  	</web-resource-collection>
+  	
+  	<!-- 사용자 설정 -->
+  	<auth-constraint>
+  		<description>관리자</description>
+  		<role-name>manager</role-name>
+  	</auth-constraint>
+  </security-constraint>
+  
+  <login-config>
+  	<auth-method>FORM</auth-method>
+  	<form-login-config>
+  		<form-login-page>/login.jsp</form-login-page>
+  		<form-error-page>/error.jsp</form-error-page>
+  	</form-login-config>
+  </login-config>
+  
 </web-app>
