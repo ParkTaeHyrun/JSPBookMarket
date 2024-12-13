@@ -33,4 +33,20 @@
   	</form-login-config>
   </login-config>
   
+  <filter>
+  	<filter-name>LogFileFilter</filter-name>
+  	<filter-class>filter.LogFileFilter</filter-class>
+  	<init-param>
+  		<param-name>filename</param-name>
+  		<param-value>c:\\logs\\bookmarket.log</param-value>
+  	</init-param>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>LogFileFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
 </web-app>
+
+
