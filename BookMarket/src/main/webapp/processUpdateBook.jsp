@@ -89,6 +89,7 @@
 			ps.setString(9, condition);
 			ps.setString(10, bookId);
 			ps.executeUpdate();
+			
 		}
 	}
 	if(rs != null) rs.close();

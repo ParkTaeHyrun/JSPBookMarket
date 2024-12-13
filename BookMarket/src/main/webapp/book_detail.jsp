@@ -13,6 +13,15 @@
 <meta charset="UTF-8">
 <title>도서 상세정보</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script type="text/javascript">
+	function addToCart() {
+		if(confirm("도서를 장바구니에 추가하시겠습니까?")){
+			document.addForm.submit();
+		}else{
+			document.addForm.reset();
+		}
+	}
+</script>
 </head>
 <body>
 	<div class="container py-4">
@@ -59,8 +68,12 @@
 				<p>분류 : <%= rs.getString("b_category") %>
 				<p>재고수 : <%= rs.getLong("b_unitsInStock") %> 권
 				<p>가격 : <%= NumberFormat.getInstance().format(rs.getInt("b_unitPrice")) %>원 
-				<p> <a href="#" class="btn btn-info">도서주문 &raquo;</a>
-				<a href="./books.jsp" class="btn btn-secondary">도서목록 &raquo;</a>	
+				
+				<form name="addForm" action="./addCart.jsp?id=<%=rs.getString("b_id")%>" method="get">
+					<a href="#" class="btn btn-info" onclick="addToCart()">도서주문 &raquo;</a>
+					<a href="./cart.jsp" class="btn btn-warning">장바구니 &raquo;</a>
+					<a href="./books.jsp" class="btn btn-secondary">도서목록 &raquo;</a>
+				</form>
 			</div>
 		</div>
 		<%
